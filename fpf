@@ -1,0 +1,21 @@
+#!/bin/sh
+# Faux pf qui utilise time et perf
+# /!\ Votre implémentation en C doit utiliser les appels système spécifiques indiqués dans le sujet
+
+case "$1" in
+	-u)
+		shift
+		command time -f "%U" "$@";;
+	-c)
+		shift
+		perf stat -e cycles -x, -o .pf.out "$@"
+		tail -n 1 .pf.out | cut -f1 -d, >&2;;
+	-a)
+		shift
+		command time -f "%e %U" -o .time.out perf stat -e cycles -x, -o .pf.out "$@"
+		time=`cat .time.out`
+		pf=`tail -n 1 .pf.out | cut -f1 -d,`
+		echo "$time $pf" >&2;;
+	*)
+		command time -f "%e" "$@";;
+esac
