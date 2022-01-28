@@ -1,6 +1,5 @@
-# TP1 - pf le cascadeur
 
-L'objectif du TP est de développer un utilitaire `pf` qui mesure les ressources utilisés par une commande.
+L'objectif est de développer un utilitaire `pf` qui mesure les ressources utilisés par une commande.
 
 ## Usage
 
